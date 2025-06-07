@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'home',  # Your custom app
 
 ]
 
@@ -60,7 +61,11 @@ ROOT_URLCONF = 'boutique_ado.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),  # Custom templates directory
+            os.path.join(BASE_DIR, 'templates', 'allauth'),  # Allauth templates
+            
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
