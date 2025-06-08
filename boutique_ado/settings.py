@@ -64,7 +64,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),  # Custom templates directory
             os.path.join(BASE_DIR, 'templates', 'allauth'),  # Allauth templates
-            
+
         ],
         'APP_DIRS': True,
         'OPTIONS': {
