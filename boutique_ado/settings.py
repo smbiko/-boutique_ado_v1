@@ -76,6 +76,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth', #required by all auth apps
                 'django.contrib.messages.context_processors.messages',
+                'bag.contexts.bag_contents',  # Custom context processor for bag contents
             ],
         },
     },
@@ -157,6 +158,9 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)  # Custom static files di
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory for user-uploaded files
+
+FREE_DELIVERY_THRESHOLD = 50  # Free delivery threshold in currency units
+STANDARD_DELIVERY_PERCENTAGE = 10  # Standard delivery percentage
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
