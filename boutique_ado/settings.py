@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-5+i=t#@a*gfm(uu6m+g(-jsaq5ucdh5oys#-j*jzd@+^gl)+a#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = []
@@ -56,7 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'boutique_ado.urls'
@@ -66,7 +66,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),  # Custom templates directory
-            os.path.join(BASE_DIR, 'templates', 'allauth'),  # Allauth templates
+            os.path.join(BASE_DIR, 'templates', 'allauth'),
 
         ],
         'APP_DIRS': True,
@@ -74,9 +74,9 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth', #required by all auth apps
+                'django.contrib.auth.context_processors.auth', 
                 'django.contrib.messages.context_processors.messages',
-                'bag.contexts.bag_contents',  # Custom context processor for bag contents
+                'bag.contexts.bag_contents',
             ],
         },
     },
@@ -153,11 +153,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)  # Custom static files directory
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory for user-uploaded files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 FREE_DELIVERY_THRESHOLD = 50  # Free delivery threshold in currency units
 STANDARD_DELIVERY_PERCENTAGE = 10  # Standard delivery percentage
