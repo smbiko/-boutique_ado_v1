@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
-import env
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -179,8 +178,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 FREE_DELIVERY_THRESHOLD = 50
 STANDARD_DELIVERY_PERCENTAGE = 10
 STRIPE_CURRENCY = 'usd'
-STRIPE_PUBLIC_KEY = env.STRIPE_PUBLIC_KEY
-STRIPE_SECRET_KEY = env.STRIPE_SECRET_KEY
+from decouple import config
+STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
+
 
 FREE_DELIVERY_THRESHOLD = 50  # Free delivery threshold in currency units
 STANDARD_DELIVERY_PERCENTAGE = 10  # Standard delivery percentage
