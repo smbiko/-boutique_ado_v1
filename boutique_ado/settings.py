@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-5+i=t#@a*gfm(uu6m+g(-jsaq5ucdh5oys#-j*jzd@+^gl)+a#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = [ 
@@ -139,9 +139,7 @@ WSGI_APPLICATION = 'boutique_ado.wsgi.application'
 #}
 
 
-DATABASES = {
-     'default': dj_database_url.parse('postgresql://neondb_owner:npg_rN1uc2sCJzKZ@ep-jolly-mode-a2qtawlc.eu-central-1.aws.neon.tech/evoke_silk_filth_152786', conn_max_age=600)
- }
+
 
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
