@@ -141,7 +141,7 @@ WSGI_APPLICATION = 'boutique_ado.wsgi.application'
 
 
 
-if 'DATABASE_URL' in os.environ:
+
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get('postgresql://neondb_owner:npg_rN1uc2sCJzKZ@ep-jolly-mode-a2qtawlc.eu-central-1.aws.neon.tech/evoke_silk_filth_152786'))
     }
