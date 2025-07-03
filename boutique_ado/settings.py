@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+import dj_database_url
 from pathlib import Path
 from decouple import config
 
@@ -27,7 +28,12 @@ SECRET_KEY = 'django-insecure-5+i=t#@a*gfm(uu6m+g(-jsaq5ucdh5oys#-j*jzd@+^gl)+a#
 DEBUG = True
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ 
+    '127.0.0.1', # vs code preview
+    'localhost', # listen for stripe webhooks
+    'boutique-ado-siya-e22500336cc2.herokuapp.com', # heroku app
+
+]
 
 
 # Application definition
@@ -125,13 +131,29 @@ WSGI_APPLICATION = 'boutique_ado.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
 
+
+DATABASES = {
+     'default': dj_database_url.parse('postgresql://neondb_owner:npg_rN1uc2sCJzKZ@ep-jolly-mode-a2qtawlc.eu-central-1.aws.neon.tech/evoke_silk_filth_152786', conn_max_age=600)
+ }
+
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('postgresql://neondb_owner:npg_rN1uc2sCJzKZ@ep-jolly-mode-a2qtawlc.eu-central-1.aws.neon.tech/evoke_silk_filth_152786'))
+    }
+else: 
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -186,8 +208,6 @@ STRIPE_WH_SECRET = config('STRIPE_WH_SECRET', '')
 DEFAULT_FROM_EMAIL = 'zacioevents@gmail.com '
 
 
-FREE_DELIVERY_THRESHOLD = 50  # Free delivery threshold in currency units
-STANDARD_DELIVERY_PERCENTAGE = 10  # Standard delivery percentage
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
