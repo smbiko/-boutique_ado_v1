@@ -57,6 +57,7 @@ INSTALLED_APPS = [
 
     # other
     'crispy_forms',  # For better form rendering
+    'storages',  # For handling static and media files in production
 
 
 ]
@@ -186,6 +187,25 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+if 'USE_AWS' in os.environ:
+    AWS_STORAGE_BUCKET_NAME = config('boutique-ado-siya', '')
+    AWS_S3_REGION_NAME = config('us-east-1', '')
+    AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', '')
+    AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', '')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+    # Static files (CSS, JavaScript, Images)
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+
+    # Media files
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+
+     # Override static and media URLs in production
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
 
 # Stripe
 FREE_DELIVERY_THRESHOLD = 50
