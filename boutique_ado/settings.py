@@ -189,8 +189,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 if 'USE_AWS' in os.environ:
-    AWS_STORAGE_BUCKET_NAME = config('boutique-ado-siya', '')
-    AWS_S3_REGION_NAME = config('us-east-1', '')
+    AWS_STORAGE_BUCKET_NAME = 'boutique-ado-siya'
+    AWS_S3_REGION_NAME = 'us-east-1'
     AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', '')
     AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', '')
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
